@@ -9,3 +9,7 @@ repository = "https://github.com/nusnewob/caddyfile-zed"
 [grammars.caddyfile]
 repository = "https://github.com/matthewpi/tree-sitter-caddyfile"
 commit = "7f96eba5c8555d6db39f55e9a54bf0992468b7cf"
+
+[language_servers.caddyfile]
+name = "Caddyfile"
+language = "Caddyfile"

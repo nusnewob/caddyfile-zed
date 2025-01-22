@@ -1,4 +1,4 @@
 name = "Caddyfile"
 grammar = "caddyfile"
-path_suffixes = ["Caddyfile.*"]
+path_suffixes = ["Caddyfile", "caddyfile"]
 line_comments = ["# "]
