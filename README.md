@@ -33,7 +33,7 @@ This extension adds basic support for [Caddyfile](https://caddyserver.com/docs/c
        "formatter": {
          "external": {
            "command": "caddy",
-           "arguments": ["fmt", "--overwrite", "{buffer_path}"]
+           "arguments": ["fmt", "{buffer_path}"]
          }
        }
      }
