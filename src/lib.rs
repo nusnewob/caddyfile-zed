@@ -18,7 +18,13 @@ impl zed::Extension for CaddyfileExtension {
 
         Ok(zed::Command {
             command: path,
-            args: vec![],
+            args: vec![
+                "validate".to_string(),
+                "--adapter".to_string(),
+                "caddyfile".to_string(),
+                "--config".to_string(),
+                "-".to_string(), // Read from stdin
+            ],
             env: vec![],
         })
     }

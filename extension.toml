@@ -1,6 +1,6 @@
 id = "caddyfile"
 name = "Caddyfile"
-version = "0.0.1"
+version = "0.0.2"
 schema_version = 1
 authors = ["Bowen Sun <me@nusnewob.dev>"]
 description = "Caddyfile support."
