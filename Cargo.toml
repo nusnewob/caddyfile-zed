@@ -1,10 +1,10 @@
 [package]
 name = "caddyfile"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-zed_extension_api = "0.6.0"
+zed_extension_api = "0.7.0"

@@ -1,0 +1,130 @@
+# Test Caddyfile for syntax highlighting
+# This file contains various Caddyfile constructs to test the extension
+
+# Simple site block
+example.com {
+	root * /var/www/html
+	file_server
+}
+
+# Site with multiple directives
+api.example.com {
+	# Handle API routes
+	handle /api/* {
+		reverse_proxy localhost:3000
+	}
+
+	# Static files
+	handle {
+		root * /var/www/static
+		file_server
+	}
+
+	# Logging
+	log {
+		output file /var/log/caddy/api.log
+		format json
+	}
+}
+
+# Global options
+{
+	admin localhost:2019
+	email admin@example.com
+}
+
+# Multiple domains
+www.example.com, example.com {
+	# Redirect to canonical domain
+	@www host www.example.com
+	redir @www https://example.com{uri} permanent
+
+	# Main site
+	root * /var/www/html
+
+	# PHP handling
+	php_fastcgi unix//run/php/php8.1-fpm.sock
+
+	# Compression
+	encode gzip
+
+	# Security headers
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+	}
+}
+
+# Environment variables and placeholders
+{$DOMAIN:localhost} {
+	root * {$SITE_ROOT:/var/www}
+
+	# Conditional based on environment
+	@dev `{$ENVIRONMENT} == "development"`
+	handle @dev {
+		respond "Development mode" 200
+	}
+
+	handle {
+		file_server
+	}
+}
+
+# Advanced matchers
+blog.example.com {
+	@images {
+		path *.jpg *.jpeg *.png *.gif *.webp
+		not path /admin/*
+	}
+
+	@api {
+		path /api/v*/*
+		method GET POST
+	}
+
+	handle @images {
+		header Cache-Control "public, max-age=31536000"
+		file_server
+	}
+
+	handle @api {
+		reverse_proxy {
+			to localhost:8080 localhost:8081
+			lb_policy round_robin
+			health_uri /health
+		}
+	}
+
+	# Default handler
+	handle {
+		root * /var/www/blog
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+# TLS configuration
+secure.example.com {
+	tls internal {
+		on_demand
+	}
+
+	respond "Secure site with internal TLS"
+}
+
+# Import directive
+import /etc/caddy/common.conf
+
+# Snippet definition
+(cors) {
+	header Access-Control-Allow-Origin "*"
+	header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+	header Access-Control-Allow-Headers "Content-Type, Authorization"
+}
+
+# Using snippet
+api2.example.com {
+	import cors
+	reverse_proxy localhost:4000
+}
