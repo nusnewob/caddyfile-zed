@@ -34,28 +34,14 @@ This extension adds basic support for [Caddyfile](https://caddyserver.com/docs/c
          "external": {
            "command": "caddy",
            "arguments": ["fmt", "-c", "-"]
+           // for Caddy docker container
+           // "command": "docker",
+           // "arguments": ["run", "--rm", "-i", "caddy", "caddy", "fmt", "-c", "-"]
          }
        }
      }
    }
    ```
-
-   <!--
-   # TODO: LSP liniting doesn't work
-   ```json
-    "lsp": {
-      "caddyfile": {
-        "language_servers": ["caddy"]
-        "code_actions_on_format": {
-          "external": {
-            "command": "caddy",
-            "arguments": ["validate", "--config", "-"]
-          }
-        }
-      }
-   }
-   ```
-   -->
 
 ## Acknowledgments
 
