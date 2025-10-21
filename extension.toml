@@ -1,11 +1,11 @@
 id = "caddyfile"
 name = "Caddyfile"
-version = "0.0.3"
+version = "0.0.4"
 schema_version = 1
 authors = ["Bowen Sun <me@nusnewob.dev>"]
 description = "Caddyfile support with syntax highlighting and Tree-sitter grammar."
 repository = "https://github.com/nusnewob/caddyfile-zed"
 
 [grammars.caddyfile]
-repository = "https://github.com/matthewpi/tree-sitter-caddyfile"
-commit = "7f96eba5c8555d6db39f55e9a54bf0992468b7cf"
+repository = "https://github.com/caddyserver/tree-sitter-caddyfile.git"
+commit = "a599a9ca6729d4a115f59a7f12247e86e9a78008"

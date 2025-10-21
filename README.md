@@ -45,4 +45,4 @@ This extension adds basic support for [Caddyfile](https://caddyserver.com/docs/c
 
 ## Acknowledgments
 
-This extension utilizes the [tree-sitter-caddyfile](https://github.com/matthewpi/tree-sitter-caddyfile) for parsing Caddyfile. Special thanks to the contributors of that project for their work.
+This extension utilizes the [tree-sitter-caddyfile](https://github.com/caddyserver/tree-sitter-caddyfile) for parsing Caddyfile. Special thanks to the contributors of that project for their work.
