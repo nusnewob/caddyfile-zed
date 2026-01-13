@@ -8,4 +8,4 @@ repository = "https://github.com/nusnewob/caddyfile-zed"
 
 [grammars.caddyfile]
 repository = "https://github.com/caddyserver/tree-sitter-caddyfile.git"
-commit = "a599a9ca6729d4a115f59a7f12247e86e9a78008"
+commit = "462aa78b5aa98442b8c8769865da84263b036c46"
