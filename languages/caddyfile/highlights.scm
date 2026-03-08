@@ -1,39 +1,52 @@
-[
-	(url)
-	(unix_socket)
-] @type
-(placeholder) @constant
-
-(site_address) @keyword
-[
-	(directive_name)
-	(snippet_name)
-] @property
-
-(named_matcher (matcher_name) @function.method)
-
-(matcher) @function.call
-
-[
-	(interpreted_string_literal)
-	(raw_string_literal)
-] @string
-
-(escape_sequence) @escape
-
-(int_literal) @number
-
 (comment) @comment
 
-;[
-;	"on"
-;	"off"
-;	"first"
-;	"last"
-;	"before"
-;	"after"
-;	"internal"
-;	"strip_prefix"
-;	"strip_suffix"
-;	"replace"
-;] @constant
+[
+  (environment_variable)
+  (placeholder)
+] @constant
+
+[
+  (network_address)
+  (ip_address_or_cidr)
+  (path)
+] @type
+
+[
+  (snippet_name)
+  (named_route_identifier)
+  (site_address)
+] @keyword
+
+(directive (directive_name) @property)
+(import_directive "import" @property)
+
+; declaration of a named matcher
+(named_matcher (matcher_identifier (matcher_name)) @function.macro)
+
+; reference to a named matcher
+(matcher (matcher_identifier (matcher_name)) @function.macro)
+
+; directive within a named matcher declaration
+(matcher_directive (matcher_directive_name) @function.method)
+
+; any other matcher (wildcard and path)
+(matcher) @function.macro
+
+[
+  (interpreted_string_literal)
+  (raw_string_literal)
+  (heredoc)
+  (cel_expression)
+] @string
+(escape_sequence) @escape
+
+[
+  (duration_literal)
+  (int_literal)
+  (status_code_fallback)
+] @number
+
+[
+  "{"
+  "}"
+] @punctuation.bracket
