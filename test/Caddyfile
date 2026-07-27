@@ -124,7 +124,11 @@ import /etc/caddy/common.conf
 }
 
 # Using snippet
+api1.example.com,
 api2.example.com {
 	import cors
 	reverse_proxy localhost:4000
+
+	@broken path_regexp /foo/(bar|baz).*
+	@also-broken path_regexp /foo/[0-9]+
 }
