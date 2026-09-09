@@ -1,6 +1,12 @@
 # Test Caddyfile for syntax highlighting
 # This file contains various Caddyfile constructs to test the extension
 
+# Global options
+{
+	admin localhost:2019
+	email admin@example.com
+}
+
 # Simple site block
 example.com {
 	root * /var/www/html
@@ -25,12 +31,6 @@ api.example.com {
 		output file /var/log/caddy/api.log
 		format json
 	}
-}
-
-# Global options
-{
-	admin localhost:2019
-	email admin@example.com
 }
 
 # Multiple domains
@@ -131,4 +131,5 @@ api2.example.com {
 
 	@broken path_regexp /foo/(bar|baz).*
 	@also-broken path_regexp /foo/[0-9]+
+	@quantified path_regexp ^/_nd-share/([A-Za-z0-9_-]{1,128})/?$
 }
