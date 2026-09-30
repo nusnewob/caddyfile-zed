@@ -1,6 +1,12 @@
 # Test Caddyfile for syntax highlighting
 # This file contains various Caddyfile constructs to test the extension
 
+# Global options
+{
+	admin localhost:2019
+	email admin@example.com
+}
+
 # Simple site block
 example.com {
 	root * /var/www/html
@@ -25,12 +31,6 @@ api.example.com {
 		output file /var/log/caddy/api.log
 		format json
 	}
-}
-
-# Global options
-{
-	admin localhost:2019
-	email admin@example.com
 }
 
 # Multiple domains
@@ -131,4 +131,27 @@ api2.example.com {
 
 	@broken path_regexp /foo/(bar|baz).*
 	@also-broken path_regexp /foo/[0-9]+
+}
+
+# Regex quantifiers must not break highlighting below the matcher
+music.example.com {
+	route {
+		@share_m3u path_regexp share_m3u ^/share/[A-Za-z0-9_-]{1,128}/m3u/?$
+		handle @share_m3u {
+			reverse_proxy 127.0.0.1:4533
+		}
+
+		# The directives below should still be highlighted
+		@share_metadata path_regexp share_metadata ^/_nd-share/([A-Za-z0-9_-]{1,128})/?$
+		handle @share_metadata {
+			header {
+				Cache-Control "no-store"
+			}
+			reverse_proxy 127.0.0.1:4533
+		}
+
+		handle {
+			file_server
+		}
+	}
 }
